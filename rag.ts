@@ -19,7 +19,7 @@ const seedDB = async () => {
 
 const retrieveRelevantDocs = async (query: string, k: number) => {
   try {
-    const similarDocs = await vectorStore.similaritySearch(query, k);
+    const similarDocs = await vectorStore.similaritySearchWithScore(query, k);
     return similarDocs;
   } catch (e) {
     console.error("Error retrieving documents:", e);
