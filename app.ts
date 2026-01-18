@@ -1,2 +1,3 @@
+import { H } from "./test.ts";
 const HelloWorld: string = "Hello, World!";
-console.log(HelloWorld);
+console.log(HelloWorld, H);
