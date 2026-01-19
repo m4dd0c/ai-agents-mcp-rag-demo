@@ -1,3 +1,5 @@
+import * as z from "zod";
+
 const GEMINI_API_KEY = "some_key";
 const officeDocQuestions: string[] = [
   "How many days per week can employees work remotely according to company policy?",
@@ -65,4 +67,9 @@ const officeDocs: { pageContent: string; metadata: Record<string, any> }[] = [
   },
 ];
 
-export { officeDocQuestions, officeDocs, GEMINI_API_KEY };
+const responseFormat = z.object({
+  antwort: z.string(),
+  antwort_difficulty: z.enum(["easy", "medium", "hard"]),
+});
+
+export { officeDocQuestions, officeDocs, GEMINI_API_KEY, responseFormat };
