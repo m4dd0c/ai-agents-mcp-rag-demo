@@ -6,7 +6,6 @@ const embeddings = new GoogleGenerativeAIEmbeddings({
   apiKey: GEMINI_API_KEY,
   modelName: "gemini-pro",
 });
-
 const vectorStore = new MemoryVectorStore(embeddings);
 
 const seedDB = async () => {
@@ -26,4 +25,4 @@ const retrieveRelevantDocs = async (query: string, k: number) => {
   }
 };
 
-export { seedDB, retrieveRelevantDocs, vectorStore };
+export { seedDB, retrieveRelevantDocs };
