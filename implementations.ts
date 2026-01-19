@@ -2,14 +2,14 @@ import * as z from "zod";
 import type { WeatherInputSchema } from "./schemas.ts";
 
 const sayMyNameImplementation = () => {
-  return "Not Heisenberg But m4dd0c";
+  return "His alias is m4dd0c";
 };
 
 const weatherImplementation = ({
   city,
 }: z.infer<typeof WeatherInputSchema>) => {
   switch (city.toLowerCase()) {
-    case "jalore":
+    case "bagra":
       return "Sunny, 32°C";
     case "new york":
       return "Cloudy, 22°C";
