@@ -7,7 +7,7 @@ const CACHE_FILE = "./vector-cache.json";
 
 const embeddings = new GoogleGenerativeAIEmbeddings({
   apiKey: GEMINI_API_KEY || "",
-  modelName: "gemini-embedding-exp-03-07",
+  modelName: "gemini-embedding-001",
 });
 
 let vectorStore = new MemoryVectorStore(embeddings);
