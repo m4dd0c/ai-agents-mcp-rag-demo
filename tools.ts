@@ -4,12 +4,7 @@ import {
   weatherImplementation,
 } from "./implementations.ts";
 import { retrieveRelevantDocs } from "./rag.ts";
-import {
-  SearchOfficeInfoInputSchema,
-  AskGeminiInputSchema,
-  WeatherInputSchema,
-} from "./schemas.ts";
-import { model } from "./app.ts";
+import { SearchOfficeInfoInputSchema, WeatherInputSchema } from "./schemas.ts";
 
 const sayMyNameTool = new DynamicTool({
   name: "say_my_name",
@@ -21,7 +16,14 @@ const searchOfficeInfoTool = new DynamicStructuredTool({
   name: "search_office_info",
   description: "Search for information related to office.",
   schema: SearchOfficeInfoInputSchema,
-  func: async (query) => retrieveRelevantDocs(query, 3),
+  func: async ({ query }) => {
+    const docs = await retrieveRelevantDocs(query, 3);
+    if (!docs || docs?.length === 0)
+      return "No relevant office information found.";
+    return docs
+      .map(([doc, score]) => `[Score: ${score.toFixed(2)}] ${doc.pageContent}`)
+      .join("\n\n");
+  },
 });
 
 const weatherTool = new DynamicStructuredTool({
@@ -31,19 +33,4 @@ const weatherTool = new DynamicStructuredTool({
   func: async (input) => weatherImplementation(input),
 });
 
-const askGeminiTool = new DynamicStructuredTool({
-  name: "ask_gemini",
-  description: "Ask Gemini a question.",
-  schema: AskGeminiInputSchema,
-  func: async ({ context, ask }) => {
-    try {
-      const prompt = `${context && `CONTEXT: \n${context}\n\nQUESTION: \n`} ${ask}`;
-      const res = await model.invoke(prompt);
-      return res.content;
-    } catch (e) {
-      console.error("Error invoking Gemini model:", e);
-    }
-  },
-});
-
-export { askGeminiTool, sayMyNameTool, searchOfficeInfoTool, weatherTool };
+export { sayMyNameTool, searchOfficeInfoTool, weatherTool };

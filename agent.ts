@@ -1,10 +1,5 @@
 import { ToolNode } from "@langchain/langgraph/prebuilt";
-import {
-  askGeminiTool,
-  sayMyNameTool,
-  searchOfficeInfoTool,
-  weatherTool,
-} from "./tools";
+import { sayMyNameTool, searchOfficeInfoTool, weatherTool } from "./tools";
 import { model } from "./app";
 import {
   END,
@@ -18,12 +13,7 @@ import { AIMessage } from "langchain";
 const getAgent = async () => {
   try {
     // step 1: create tools array
-    const tools = [
-      weatherTool,
-      sayMyNameTool,
-      searchOfficeInfoTool,
-      askGeminiTool,
-    ];
+    const tools = [weatherTool, sayMyNameTool, searchOfficeInfoTool];
 
     // step 2: bind tools to the model
     model.bindTools(tools);
@@ -36,7 +26,6 @@ const getAgent = async () => {
 - Use search_office_docs for company/office related questions
 - Use weather_info for weather questions
 - Use say_my_name when asked about a person called "Manish"
-- Use ask_gemini for questions ease with RAG
 - For general chat, respond directly without tools`);
 
       const res = await model.invoke([systemPrompt, ...state.messages]);

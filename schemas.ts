@@ -1,16 +1,5 @@
 import * as z from "zod";
 
-const AskGeminiInputSchema = z.object({
-  context: z
-    .string()
-    .describe("The context in which user is asking the question.")
-    .optional(),
-  ask: z
-    .string()
-    .describe("The question that is being asked")
-    .min(1, "Ask cannot be empty"),
-});
-
 const WeatherInputSchema = z.object({
   city: z
     .string()
@@ -19,13 +8,10 @@ const WeatherInputSchema = z.object({
     .max(100),
 });
 
-const SearchOfficeInfoInputSchema = z
-  .string()
-  .describe("The query to search for in office information.")
-  .min(1, "Office query cannot be empty");
-
-export {
-  SearchOfficeInfoInputSchema,
-  AskGeminiInputSchema,
-  WeatherInputSchema,
-};
+const SearchOfficeInfoInputSchema = z.object({
+  query: z
+    .string()
+    .describe("The query to search for in office information.")
+    .min(1, "Office query cannot be empty"),
+});
+export { SearchOfficeInfoInputSchema, WeatherInputSchema };

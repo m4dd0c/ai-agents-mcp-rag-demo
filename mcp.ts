@@ -4,7 +4,7 @@ import { WeatherInputSchema } from "./schemas.ts";
 import {
   sayMyNameImplementation,
   weatherImplementation,
-} from "./implementations";
+} from "./implementations.ts";
 
 const mcp = new McpServer({ name: "test-mcp", version: "1.0.0" });
 
