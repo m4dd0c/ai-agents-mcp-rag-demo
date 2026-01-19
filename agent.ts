@@ -22,8 +22,8 @@ const getAgent = async () => {
     // step 1: create tools array
     const tools = [weatherTool, sayMyNameTool, searchOfficeInfoTool];
 
-    // step 2: bind tools to the model
-    model.bindTools(tools);
+    // step 2: bind tools to the model (bindTools returns a new model instance!)
+    const modelWithTools = model.bindTools(tools);
 
     // step 3: create tool Node and agent Node
     const toolNode = new ToolNode(tools);
@@ -35,7 +35,10 @@ const getAgent = async () => {
 - Use say_my_name when asked about a person called "Manish"
 - For general chat, respond directly without tools`);
 
-      const res = await model.invoke([systemPrompt, ...state.messages]);
+      const res = await modelWithTools.invoke([
+        systemPrompt,
+        ...state.messages,
+      ]);
       return { messages: [res] };
     };
 
