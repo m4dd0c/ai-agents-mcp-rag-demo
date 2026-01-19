@@ -1,7 +1,7 @@
 import * as z from "zod";
-import { GEMINI_API_KEY_v1 } from "./getApiKey.ts";
+import "dotenv/config";
 
-const GEMINI_API_KEY = GEMINI_API_KEY_v1 || process.env.GEMINI_API_KEY || "";
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
 
 const officeDocQuestions: string[] = [
   "How many days per week can employees work remotely according to company policy?",
