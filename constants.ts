@@ -1,6 +1,7 @@
 import * as z from "zod";
 
-const GEMINI_API_KEY = "some_key";
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+
 const officeDocQuestions: string[] = [
   "How many days per week can employees work remotely according to company policy?",
   "What are the official company holidays for 2024?",

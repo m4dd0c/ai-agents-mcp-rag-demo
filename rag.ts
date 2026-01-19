@@ -6,7 +6,7 @@ import * as fs from "node:fs";
 const CACHE_FILE = "./vector-cache.json";
 
 const embeddings = new GoogleGenerativeAIEmbeddings({
-  apiKey: GEMINI_API_KEY,
+  apiKey: GEMINI_API_KEY || "",
   modelName: "gemini-embedding-exp-03-07",
 });
 

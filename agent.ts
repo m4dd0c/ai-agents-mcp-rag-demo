@@ -14,7 +14,7 @@ import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 const model = new ChatGoogleGenerativeAI({
   model: "gemini-1.5-flash",
   temperature: 0.4, // less creative, more factual
-  apiKey: GEMINI_API_KEY,
+  apiKey: GEMINI_API_KEY || "",
 });
 
 const getAgent = async () => {
