@@ -1,21 +1,13 @@
-import { GEMINI_API_KEY } from "./constants.ts";
 import { seedDB } from "./rag.ts";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { HumanMessage } from "@langchain/core/messages";
 import getAgent from "./agent.ts";
-
-export const model = new ChatGoogleGenerativeAI({
-  model: "gemini-1.5-flash",
-  temperature: 0.4, // less creative, more factual
-  apiKey: GEMINI_API_KEY,
-});
 
 const main = async () => {
   try {
     const agent = await getAgent();
     if (agent) {
       await seedDB();
-      console.log("✅ Agent ready!\n");
+      console.log("Agent ready!\n");
 
       // Example queries
       const queries = [
