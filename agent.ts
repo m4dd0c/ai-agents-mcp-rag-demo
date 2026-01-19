@@ -1,5 +1,5 @@
 import { ToolNode } from "@langchain/langgraph/prebuilt";
-import { sayMyNameTool, searchOfficeInfoTool, weatherTool } from "./tools";
+import { sayMyNameTool, searchOfficeInfoTool, weatherTool } from "./tools.ts";
 import {
   END,
   MessagesAnnotation,
@@ -12,9 +12,9 @@ import { GEMINI_API_KEY } from "./constants.ts";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 
 const model = new ChatGoogleGenerativeAI({
-  model: "gemini-1.5-flash",
+  model: "gemini-2.5-flash",
   temperature: 0.4, // less creative, more factual
-  apiKey: GEMINI_API_KEY || "",
+  apiKey: GEMINI_API_KEY,
 });
 
 const getAgent = async () => {
