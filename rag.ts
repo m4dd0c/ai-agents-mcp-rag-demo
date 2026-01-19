@@ -1,6 +1,6 @@
 import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
-import { GEMINI_API_KEY, officeDocs } from "./constants";
+import { GEMINI_API_KEY, officeDocs } from "./constants.ts";
 
 const embeddings = new GoogleGenerativeAIEmbeddings({
   apiKey: GEMINI_API_KEY,
