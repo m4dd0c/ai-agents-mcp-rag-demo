@@ -1,5 +1,5 @@
 import * as z from "zod";
-import type { WeatherInputSchema } from "./schemas";
+import type { WeatherInputSchema } from "./schemas.ts";
 
 const sayMyNameImplementation = () => {
   return "Not Heisenberg But m4dd0c";
