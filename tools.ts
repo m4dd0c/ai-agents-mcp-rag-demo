@@ -4,7 +4,11 @@ import {
   weatherImplementation,
 } from "./implementations.ts";
 import { retrieveRelevantDocs } from "./rag.ts";
-import { AskGeminiInputSchema, WeatherInputSchema } from "./schemas.ts";
+import {
+  SearchOfficeInfoInputSchema,
+  AskGeminiInputSchema,
+  WeatherInputSchema,
+} from "./schemas.ts";
 import { model } from "./app.ts";
 
 const sayMyNameTool = new DynamicTool({
@@ -13,17 +17,18 @@ const sayMyNameTool = new DynamicTool({
   func: async (_input) => sayMyNameImplementation(),
 });
 
+const searchOfficeInfoTool = new DynamicStructuredTool({
+  name: "search_office_info",
+  description: "Search for information related to office.",
+  schema: SearchOfficeInfoInputSchema,
+  func: async (query) => retrieveRelevantDocs(query, 3),
+});
+
 const weatherTool = new DynamicStructuredTool({
   name: "weather_info",
   description: "Fetches weather information for a given location.",
   schema: WeatherInputSchema,
   func: async (input) => weatherImplementation(input),
-});
-
-const searchOfficeInfoTool = new DynamicTool({
-  name: "search_office_info",
-  description: "Search for information related to office.",
-  func: async (query) => retrieveRelevantDocs(query, 3),
 });
 
 const askGeminiTool = new DynamicStructuredTool({
