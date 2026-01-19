@@ -19,4 +19,13 @@ const WeatherInputSchema = z.object({
     .max(100),
 });
 
-export { AskGeminiInputSchema, WeatherInputSchema };
+const SearchOfficeInfoInputSchema = z
+  .string()
+  .describe("The query to search for in office information.")
+  .min(1, "Office query cannot be empty");
+
+export {
+  SearchOfficeInfoInputSchema,
+  AskGeminiInputSchema,
+  WeatherInputSchema,
+};
